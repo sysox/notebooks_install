@@ -3,7 +3,7 @@ param(
     [string]$Style = "classic"
 )
 
-# Usage: .\start_notebook.ps1 [notebook] [classic|lab]
+# Usage: .\start_jupyter.ps1 [notebook] [classic|lab]
 
 if ($Notebook -eq "classic" -or $Notebook -eq "lab") {
     $Style = $Notebook

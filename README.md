@@ -32,56 +32,56 @@ the file browser. Without a notebook path, it uses this project folder.
 ## macOS/Linux
 
 ```bash
-chmod +x start_notebook.sh
-./start_notebook.sh
+chmod +x start_jupyter.sh
+./start_jupyter.sh
 ```
 
 Open the example notebook:
 
 ```bash
-./start_notebook.sh notebooks/basic.ipynb
+./start_jupyter.sh notebooks/basic.ipynb
 ```
 
 Use JupyterLab:
 
 ```bash
-./start_notebook.sh notebooks/basic.ipynb lab
+./start_jupyter.sh notebooks/basic.ipynb lab
 ```
 
 Or open JupyterLab without selecting a notebook:
 
 ```bash
-./start_notebook.sh lab
+./start_jupyter.sh lab
 ```
 
 ## Windows
 
 ```powershell
-.\start_notebook.ps1
+.\start_jupyter.ps1
 ```
 
 Open the example notebook:
 
 ```powershell
-.\start_notebook.ps1 .\notebooks\basic.ipynb
+.\start_jupyter.ps1 .\notebooks\basic.ipynb
 ```
 
 Use JupyterLab:
 
 ```powershell
-.\start_notebook.ps1 .\notebooks\basic.ipynb lab
+.\start_jupyter.ps1 .\notebooks\basic.ipynb lab
 ```
 
 Or open JupyterLab without selecting a notebook:
 
 ```powershell
-.\start_notebook.ps1 lab
+.\start_jupyter.ps1 lab
 ```
 
 If PowerShell blocks local scripts:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\start_notebook.ps1
+powershell -ExecutionPolicy Bypass -File .\start_jupyter.ps1
 ```
 
 ## Tests

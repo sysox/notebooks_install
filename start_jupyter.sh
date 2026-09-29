@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Usage: ./start_notebook.sh [notebook] [classic|lab]
+# Usage: ./start_jupyter.sh [notebook] [classic|lab]
 
 set -e
 
