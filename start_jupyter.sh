@@ -47,8 +47,9 @@ if [ -f "$MARKER" ]; then
     INSTALLED_HASH="$(cat "$MARKER")"
 fi
 
-if [ ! -x "$VENV/bin/python" ]; then
-    python3 -m venv "$VENV"
+# Rebuild the venv when it is missing or its base Python was removed or changed.
+if ! "$VENV/bin/python" --version >/dev/null 2>&1; then
+    python3 -m venv --clear "$VENV"
     INSTALLED_HASH=""
 fi
 

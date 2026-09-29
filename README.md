@@ -5,7 +5,8 @@ and open Jupyter in the browser.
 
 The first run installs packages. Later runs skip installation. If
 `requirements.txt` changes, the scripts detect the change and install again.
-If the base Python installation changes or is removed, delete `.venv` and run
+If the base Python installation changes or is removed, the scripts rebuild
+`.venv` automatically. If Jupyter still fails to start, delete `.venv` and run
 the launcher again.
 
 Python 3 must already be installed:

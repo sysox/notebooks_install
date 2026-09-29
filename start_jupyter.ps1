@@ -31,8 +31,15 @@ if (Test-Path $Marker) {
     $InstalledHash = ([string](Get-Content $Marker -Raw)).Trim()
 }
 
-if (-not (Test-Path $VenvPython)) {
-    py -3 -m venv $Venv
+# Rebuild the venv when it is missing or its base Python was removed or changed.
+$VenvWorks = $false
+if (Test-Path $VenvPython) {
+    & $VenvPython --version *> $null
+    $VenvWorks = $LASTEXITCODE -eq 0
+}
+
+if (-not $VenvWorks) {
+    py -3 -m venv --clear $Venv
     if ($LASTEXITCODE -ne 0) {
         throw "Could not create the virtual environment"
     }
