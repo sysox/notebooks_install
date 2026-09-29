@@ -1,108 +1,138 @@
-# Simple Jupyter Notebook launcher
+# Simple Jupyter launcher
 
-The scripts create a local `.venv`, install everything in `requirements.txt`,
-and open Jupyter in the browser. The first run installs packages; later runs
-start Jupyter straight away.
+## Quick start
 
-Python 3 must already be installed:
+Install Python 3 first:
 
 - macOS: [python.org](https://www.python.org/downloads/) or `brew install python`
-- Linux: [python.org](https://www.python.org/downloads/) or your package
-  manager; on Debian/Ubuntu also `sudo apt install python3-venv`
-- Windows: install Python with the `py` launcher enabled
+- Linux: use your package manager
+- Windows: install Python with the `py` launcher enabled; the script calls `py -3`
 
-## Usage
+On macOS, do not rely on the older Python offered through Command Line Tools;
+install a current Python from python.org or Homebrew.
 
-The optional arguments are positional:
+On Debian/Ubuntu, you may also need:
+
+```bash
+sudo apt install python3-venv
+```
+
+### macOS/Linux
+
+```bash
+./start_jupyter.sh
+```
+
+### Windows PowerShell
+
+```powershell
+.\start_jupyter.ps1
+```
+
+The default interface is the classic Notebook. The first run creates `.venv`
+and installs `requirements.txt`; later runs start Jupyter directly. The browser
+opens automatically. Stop Jupyter with `Ctrl+C`.
+
+Put notebooks in this repository, for example in `notebooks/`. Add packages
+needed by your notebooks to `requirements.txt`.
+
+## Open a notebook
+
+Pass a notebook path as the first argument:
+
+```bash
+./start_jupyter.sh notebooks/basic.ipynb
+```
+
+```powershell
+.\start_jupyter.ps1 .\notebooks\basic.ipynb
+```
+
+Paths are resolved from the folder where the command is run.
+
+## Use JupyterLab
+
+JupyterLab is optional and is never selected by default. Pass `lab` explicitly:
+
+```bash
+./start_jupyter.sh notebooks/basic.ipynb lab
+./start_jupyter.sh lab
+```
+
+```powershell
+.\start_jupyter.ps1 .\notebooks\basic.ipynb lab
+.\start_jupyter.ps1 lab
+```
+
+The argument format is:
 
 ```text
 [notebook] [classic|lab]
 ```
 
-The default is `classic`, the classic Notebook interface. Use `lab` for
-JupyterLab. Notebook paths are resolved from the folder where the command is
-run, and Jupyter's file browser opens in the notebook's folder (or in this
-project folder when no notebook is given).
+When a notebook is supplied, Jupyter uses that notebook's folder in the file
+browser. Without one, it uses this project folder.
 
-Stop Jupyter with Ctrl+C in the terminal where it runs.
+If the executable permission is lost, run `chmod +x start_jupyter.sh`, or use
+`bash start_jupyter.sh`. Linux double-click behavior depends on the desktop
+environment.
 
-### macOS/Linux
+## Windows and macOS shortcuts
 
-```bash
-./start_jupyter.sh                            # classic Notebook
-./start_jupyter.sh notebooks/basic.ipynb      # open a notebook
-./start_jupyter.sh notebooks/basic.ipynb lab  # open a notebook in JupyterLab
-./start_jupyter.sh lab                        # JupyterLab without a notebook
-```
-
-If you get "Permission denied", run `chmod +x start_jupyter.sh` once, or start
-it with `bash start_jupyter.sh`.
-
-On macOS, you can also double-click `start_jupyter.command` in Finder. If
-macOS blocks it the first time, right-click the file, choose **Open**, and
-confirm. On Linux, run the script from a terminal; double-clicking scripts
-works differently in each desktop environment.
-
-### Windows
+On Windows, double-click `start_jupyter.cmd`. It works even when PowerShell
+blocks local scripts. It can also receive the same arguments:
 
 ```powershell
-.\start_jupyter.ps1                              # classic Notebook
-.\start_jupyter.ps1 .\notebooks\basic.ipynb      # open a notebook
-.\start_jupyter.ps1 .\notebooks\basic.ipynb lab  # open a notebook in JupyterLab
-.\start_jupyter.ps1 lab                          # JupyterLab without a notebook
+.\start_jupyter.cmd .\notebooks\basic.ipynb lab
 ```
 
-`start_jupyter.cmd` accepts the same arguments and also works when PowerShell
-blocks local scripts. You can double-click it in Explorer.
-
-## Your notebooks and packages
-
-Put notebooks in `notebooks/`. Add the packages they need to
-`requirements.txt`; the launcher installs them on its next start.
-
-## Use in another repo
-
-Copy these files into the root of the other repo:
-
-| File | Purpose |
-|---|---|
-| `start_jupyter.sh` | macOS/Linux launcher |
-| `start_jupyter.command` | macOS double-click launcher |
-| `start_jupyter.ps1` | Windows launcher |
-| `start_jupyter.cmd` | Windows double-click launcher |
-| `.gitattributes` | Keeps Windows line endings in `start_jupyter.cmd`; if the repo already has one, add its line instead |
-
-Then, in the other repo:
-
-1. Add `nbclassic` and `jupyterlab` to its `requirements.txt`, next to the
-   packages its notebooks need.
-2. Add `.venv/` to its `.gitignore`.
-3. Keep the macOS/Linux launchers executable in git, because copying on
-   Windows or through some file managers drops that flag:
-
-   ```bash
-   git add --chmod=+x start_jupyter.sh start_jupyter.command
-   ```
-
-Do not copy `requirements.txt`, `notebooks/` or `tests/` from this repo; they
-belong to the example.
-
-## Troubleshooting
-
-- **Packages changed:** the launcher notices edits to `requirements.txt` and
-  installs again.
-- **Python upgraded or removed:** the launcher rebuilds `.venv` automatically.
-- **Jupyter still fails to start:** delete `.venv` and run the launcher again.
-- **macOS asks to install Command Line Tools:** no Python is installed yet.
-  Install one of the Pythons above instead; the Command Line Tools provide an
-  older one.
-- **PowerShell blocks the script:** use `start_jupyter.cmd` instead.
+On macOS, double-click `start_jupyter.command`. If macOS blocks it, right-click
+the file, choose **Open**, and confirm.
 
 ## Tests
 
 The example notebook is tested with `nbclient`:
 
 ```bash
-.venv/bin/python -m pytest              # macOS/Linux
-.venv\Scripts\python.exe -m pytest      # Windows
+.venv/bin/python -m pytest
 ```
+
+Windows:
+
+```powershell
+.venv\Scripts\python.exe -m pytest
+```
+
+## Use in another repository
+
+Copy the four launchers and `.gitattributes` into the other repository:
+
+```text
+start_jupyter.sh
+start_jupyter.command
+start_jupyter.ps1
+start_jupyter.cmd
+.gitattributes
+```
+
+Do not copy this repository's `requirements.txt`, `notebooks/`, or `tests/`;
+they belong to this example. Add `nbclassic` and `jupyterlab` to the other
+repository's existing `requirements.txt`, and add `.venv/` to its `.gitignore`.
+
+Keep the Unix launchers executable in Git:
+
+```bash
+git add --chmod=+x start_jupyter.sh start_jupyter.command
+```
+
+If the other repository already has a `.gitattributes`, add the `*.cmd text
+eol=crlf` line to it instead of replacing the file.
+
+The launchers expect notebooks and `requirements.txt` in the other repository's
+root.
+
+## Recovery
+
+The launchers rebuild `.venv` when its Python executable is missing. If that
+does not fix a Python installation change, delete `.venv` and run the launcher
+again. Changes to `requirements.txt` are detected automatically.
