@@ -98,6 +98,39 @@ accepts the same arguments from `cmd` or PowerShell:
 .\start_jupyter.cmd .\notebooks\basic.ipynb lab
 ```
 
+## Use in another repo
+
+Copy these files into the root of the other repo:
+
+| File | Purpose |
+|---|---|
+| `start_jupyter.sh` | macOS/Linux launcher |
+| `start_jupyter.command` | macOS double-click launcher |
+| `start_jupyter.ps1` | Windows launcher |
+| `start_jupyter.cmd` | Windows double-click launcher |
+| `.gitattributes` | Keeps Windows line endings in `start_jupyter.cmd`; if the repo already has one, add its line instead |
+
+Then, in the other repo:
+
+1. Add the Jupyter interfaces to its `requirements.txt`, next to the packages
+   its notebooks need:
+
+   ```text
+   nbclassic
+   jupyterlab
+   ```
+
+2. Add `.venv/` to its `.gitignore`.
+3. Keep the macOS/Linux launchers executable in git, because copying on
+   Windows or through some file managers drops that flag:
+
+   ```bash
+   git add --chmod=+x start_jupyter.sh start_jupyter.command
+   ```
+
+Do not copy `requirements.txt`, `notebooks/` or `tests/` from this repo; they
+belong to the example.
+
 ## Tests
 
 The example notebook is tested with `nbclient`:
