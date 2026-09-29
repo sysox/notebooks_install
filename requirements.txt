@@ -1,0 +1,11 @@
+# The familiar, classic Jupyter Notebook interface.
+nbclassic
+
+# Optional interface. Start it with lab as the second argument.
+jupyterlab
+
+# Tools for running the example notebook tests.
+pytest
+nbclient
+nbformat
+ipykernel
