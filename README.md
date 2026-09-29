@@ -10,7 +10,10 @@ the launcher again.
 
 Python 3 must already be installed:
 
-- macOS/Linux: [python.org](https://www.python.org/downloads/)
+- macOS: [python.org](https://www.python.org/downloads/) or `brew install python`.
+  Without either, the first run of `python3` asks to install Apple's Command
+  Line Tools, which provide an older Python.
+- Linux: [python.org](https://www.python.org/downloads/) or your package manager
 - Windows: install Python with the `py` launcher enabled
 - Debian/Ubuntu: install the venv package if needed: `sudo apt install python3-venv`
 
@@ -53,6 +56,12 @@ Or open JupyterLab without selecting a notebook:
 ```bash
 ./start_jupyter.sh lab
 ```
+
+If the script is not executable, run it with `bash start_jupyter.sh` instead.
+
+On macOS, you can also double-click `start_jupyter.command` in Finder. It
+opens Terminal and starts the classic Notebook. If macOS blocks it the first
+time, right-click the file, choose **Open**, and confirm.
 
 ## Windows
 
