@@ -63,6 +63,9 @@ On macOS, you can also double-click `start_jupyter.command` in Finder. It
 opens Terminal and starts the classic Notebook. If macOS blocks it the first
 time, right-click the file, choose **Open**, and confirm.
 
+On Linux, run `start_jupyter.sh` from a terminal; double-clicking scripts
+works differently in each desktop environment.
+
 ## Windows
 
 ```powershell
@@ -87,10 +90,12 @@ Or open JupyterLab without selecting a notebook:
 .\start_jupyter.ps1 lab
 ```
 
-If PowerShell blocks local scripts:
+You can also double-click `start_jupyter.cmd` in Explorer. It starts the
+classic Notebook and works even when PowerShell blocks local scripts. It
+accepts the same arguments from `cmd` or PowerShell:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\start_jupyter.ps1
+.\start_jupyter.cmd .\notebooks\basic.ipynb lab
 ```
 
 ## Tests
