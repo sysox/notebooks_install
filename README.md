@@ -23,6 +23,10 @@ sudo apt install python3-venv
 ./start_jupyter.sh
 ```
 
+If the executable permission is lost, run `chmod +x start_jupyter.sh`, or use
+`bash start_jupyter.sh`. Linux double-click behavior depends on the desktop
+environment.
+
 ### Windows PowerShell
 
 ```powershell
@@ -73,10 +77,6 @@ The argument format is:
 When a notebook is supplied, Jupyter uses that notebook's folder in the file
 browser. Without one, it uses this project folder.
 
-If the executable permission is lost, run `chmod +x start_jupyter.sh`, or use
-`bash start_jupyter.sh`. Linux double-click behavior depends on the desktop
-environment.
-
 ## Windows and macOS shortcuts
 
 On Windows, double-click `start_jupyter.cmd`. It works even when PowerShell
@@ -91,7 +91,9 @@ the file, choose **Open**, and confirm.
 
 ## Tests
 
-The example notebook is tested with `nbclient`:
+The example notebook is tested with `nbclient`.
+
+macOS/Linux:
 
 ```bash
 .venv/bin/python -m pytest
@@ -128,11 +130,11 @@ git add --chmod=+x start_jupyter.sh start_jupyter.command
 If the other repository already has a `.gitattributes`, add the `*.cmd text
 eol=crlf` line to it instead of replacing the file.
 
-The launchers expect notebooks and `requirements.txt` in the other repository's
-root.
+The launchers must sit next to that repository's `requirements.txt`; notebooks
+can be anywhere.
 
 ## Recovery
 
-The launchers rebuild `.venv` when its Python executable is missing. If that
-does not fix a Python installation change, delete `.venv` and run the launcher
-again. Changes to `requirements.txt` are detected automatically.
+The launchers rebuild `.venv` when its Python is missing or no longer runs. If
+that does not fix a Python installation change, delete `.venv` and run the
+launcher again. Changes to `requirements.txt` are detected automatically.
